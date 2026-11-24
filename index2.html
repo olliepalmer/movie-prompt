@@ -8,18 +8,22 @@
 <!--   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
  --></head>
 
-<body onload='loadSubjects().then(newPhrase)'>
+<body onload='loadAll().then(newPhrase)'>
   <div class='outer' id='bgd'>
     <div class='middle'>
       <div class='inner'>
-        <p>
-          <span class='small'>write a scene featuring:</span><br>
-          <span id='subject'>_________________</span></p>
-          <p><span class='small'>in the genre:</span><br>
-            <span id='genre'>_________________</span></p>
+        <p><span class='small'>write a scene featuring:</span><br>
+          <span id='obj1'>_________________</span><br>
+          <span class='small'>and</span><br>
+          <span id='obj2'>_________________</span></p>
+        <p><span class='small'>set in:</span><br>
+          <span id='place'>_________________</span></p>
+        <p><span class='small'>at the time of:</span><br>
+          <span id='time'>_________________</span></p>
         <div class='buttons'>
-          <button id='nn' class='w3-button w3-hover-blue' onclick='newSubject()'>new subject</button>
-          <button id='na' class='w3-button w3-hover-blue' onclick='newGenre()'>new genre</button>
+          <button id='no' class='w3-button w3-hover-blue' onclick='newObjects()'>new objects</button>
+          <button id='nl' class='w3-button w3-hover-blue' onclick='newPlace()'>new place</button>
+          <button id='nt' class='w3-button w3-hover-blue' onclick='newTime()'>new time</button>
           <button id='np' class='w3-button w3-hover-blue' onclick='newPhrase()'>new combination</button>
         </div>
         <p class='vsmall' id='footer'><br><br>movie subject generator<br>

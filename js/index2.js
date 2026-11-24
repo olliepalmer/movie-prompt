@@ -1,117 +1,46 @@
-// genres and subjects
-var genre = [
-"western",
-  "film noir",
-  "neo noir",
-  "coming-of-age film",
-  "thriller",
-  "psychological thriller",
-  "soap opera",
-  "horror",
-  "children’s film",
-  "animal journey",
-  "courtroom drama",
-  "docudrama",
-  "fly-on-the-wall documentary",
-  "musical",
-  "magical realism",
-  "procedural drama",
-  "mockumentary",
-  "slapstick",
-  "cooking show",
-  "educational video",
-  "game show",
-  "infomercial",
-  "advertisement",
-  "corporate training film",
-  "propaganda film",
-  "news bulletin",
-  "news segment",
-  "magazine show",
-  "stand up comedy",
-  "talk show",
-  "kung fu film",
-  "epic saga",
-  "road movie",
-  "music video",
-  "low-budget horror",
-  "heist",
-  "slasher",
-  "hybrid-reality",
-  "neo-realism",
-  "action",
-  "science fiction",
-  "surrealism",
-  "psychological horror",
-  "animation",
-  "historical",
-  "historical fantasy",
-  "fantasy",
-  "biography",
-  "true crime",
-  "cyberpunk",
-  "murder mystery",
-  "indie",
-  "space opera",
-  "drama",
-  "adventure",
-  "body horror",
-  "sitcom",
-  "period drama",
-  "adult",
-  "romance",
-  "anime"
-]
-var subject = ["(loading objects.txt…)"]
+var lists = {objects: [], places: [], times: []};
 
-function loadSubjects() {
-  return fetch("objects.txt")
+function loadList(name) {
+  return fetch(name + ".txt")
     .then(function(r){ if(!r.ok) throw new Error(r.status); return r.text(); })
-    .then(function(t){
-      var items = t.split(/?
-/).map(function(s){return s.trim();}).filter(Boolean);
-      if(items.length) subject = items;
-    })
-    .catch(function(e){ subject = ["could not load objects.txt (run via a web server)"]; });
+    .then(function(t){ lists[name] = t.split(/\r?\n/).map(function(s){return s.trim();}).filter(Boolean); })
+    .catch(function(){ lists[name] = ["could not load " + name + ".txt (run via a web server)"]; });
 }
 
+function loadAll() {
+  return Promise.all([loadList("objects"), loadList("places"), loadList("times")]);
+}
 
+function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
-function newGenre() {
-  var randomGenre = genre[Math.floor(Math.random() * genre.length)];
-  document.getElementById('genre').innerHTML = randomGenre;
-  var newColor = randomColor({hue:'orange'});
-  document.getElementById('genre').style.color = newColor;
-  document.getElementById('na').style.background = newColor;
+function setItem(id, text, btn) {
+  var c = randomColor({hue:'orange'});
+  var el = document.getElementById(id);
+  el.textContent = text;
+  el.style.color = c;
+  if (btn) document.getElementById(btn).style.background = c;
+}
+
+function newObjects() {
+  var a = pick(lists.objects), b = pick(lists.objects);
+  for (var i = 0; i < 20 && lists.objects.length > 1 && b === a; i++) b = pick(lists.objects);
+  setItem('obj1', a, 'no');
+  setItem('obj2', b);
   newBg();
 }
+function newPlace() { setItem('place', pick(lists.places), 'nl'); newBg(); }
+function newTime() { setItem('time', pick(lists.times), 'nt'); newBg(); }
 
-function newSubject(){
-  var randomSubject = subject[Math.floor(Math.random() * subject.length)];
-  document.getElementById('subject').innerHTML = randomSubject;
-  var newColor = randomColor({hue:'orange'});
-  document.getElementById('subject').style.color = newColor;
-  document.getElementById('nn').style.background = newColor;
-  newBg();
+function newPhrase() {
+  newObjects(); newPlace(); newTime();
+  var c = randomColor({hue:'blue',luminosity:'dark'});
+  document.getElementById('bgd').style.background = c;
+  ['no','nl','nt','np'].forEach(function(id){ document.getElementById(id).style.color = c; });
 }
 
-function newPhrase () {
-  newGenre();
-  newSubject();
-  var newColor = randomColor({hue:'blue',luminosity:'dark'});
-  document.getElementById('bgd').style.background = newColor;
-  document.getElementById('na').style.color = newColor;
-  document.getElementById('nn').style.color = newColor;
-  document.getElementById('np').style.color = newColor;
-}
-
-function newBg () {
-  var newColor = randomColor({hue:'blue',luminosity:'dark'});
-  document.getElementById('bgd').style.background = newColor;
-  newColor = randomColor({hue:'blue',luminosity:'light'});
-  // document.getElementById('footer').style.color = newColor;
-  newColor = randomColor({hue:'yellow',luminosity:'bright'})
-  document.getElementById('np').style.background = newColor;
+function newBg() {
+  document.getElementById('bgd').style.background = randomColor({hue:'blue',luminosity:'dark'});
+  document.getElementById('np').style.background = randomColor({hue:'yellow',luminosity:'bright'});
 }
 
 // randomColor by David Merfield under the CC0 license
