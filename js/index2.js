@@ -18,6 +18,7 @@ function setItem(id, text, btn) {
   var el = document.getElementById(id);
   el.textContent = text;
   el.style.color = c;
+  if (el.tagName === 'A') el.href = 'https://www.google.com/search?q=' + encodeURIComponent(text);
   if (btn) document.getElementById(btn).style.background = c;
 }
 

@@ -100,7 +100,7 @@ body {
   font-size: 0.6em;
 }
 
-#subject, #genre {
+#subject, #genre, #obj1, #obj2, #place, #time {
   font-weight: bold;
 }
 
@@ -136,3 +136,6 @@ a:hover {
     border-radius: 3px;
   }
 }
+
+.artefact, .artefact:visited { text-decoration: none; }
+.artefact:hover { background-color: transparent; text-decoration: underline; }
