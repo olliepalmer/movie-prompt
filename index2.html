@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>movie subject generator</title>
+  <link rel="stylesheet" href="css/style.css">
+<!--   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+ --></head>
+
+<body onload='loadSubjects().then(newPhrase)'>
+  <div class='outer' id='bgd'>
+    <div class='middle'>
+      <div class='inner'>
+        <p>
+          <span class='small'>write a scene featuring:</span><br>
+          <span id='subject'>_________________</span></p>
+          <p><span class='small'>in the genre:</span><br>
+            <span id='genre'>_________________</span></p>
+        <div class='buttons'>
+          <button id='nn' class='w3-button w3-hover-blue' onclick='newSubject()'>new subject</button>
+          <button id='na' class='w3-button w3-hover-blue' onclick='newGenre()'>new genre</button>
+          <button id='np' class='w3-button w3-hover-blue' onclick='newPhrase()'>new combination</button>
+        </div>
+        <p class='vsmall' id='footer'><br><br>movie subject generator<br>
+          created for teaching on the <a href="https://sd.olliepalmer.com" target="_blank">scripted design</a> elective module in the <a href="https://www.akvstjoostmasters.nl/programmes/situated-design" target="_blank">situated design course</a><br>
+          at the <a href="https://www.akvstjoostmasters.nl/" target="_blank">master institute of visual cultures, akv st joost</a><br>
+          <br>Copyright © 2019-26 <a href="https://olliepalmer.com" target='_blank'>ollie palmer</a><br>
+          Site distributed at <a href="https://github.com/olliepalmer/movie-prompt" target="_blank">github</a> under an MIT license (use, adapt, modify as you like) :)</p>
+      </div>
+    </div>
+  </div>
+<script  src="js/index2.js"></script>
+</body>
+
+</html>
